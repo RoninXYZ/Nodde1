@@ -31,7 +31,10 @@ const rl = readline.createInterface({
 })
 rl.question('masukan nama anda?? ', (answer) => {
     // TODO: Log the answer in a database
-    console.log(`Terima kasih ${answer}`);
-  
-    rl.close();
+    rl.question('masukan nomor hp anda??' ,(answer1)=>{
+      console.log(`Terimakasih ${answer} no hp anda ${answer1}`)
+      rl.close();
+    })
+
+   
   });
