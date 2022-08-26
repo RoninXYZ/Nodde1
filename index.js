@@ -1,1 +1,2 @@
-console.log("Hello WPU");
+const nama = "Sandika Galih";
+console.log(nama);
