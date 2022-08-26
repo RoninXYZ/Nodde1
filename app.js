@@ -13,5 +13,25 @@ const fs = require('fs');
 //})
 
 //membaca isi file dengan syncronus
-const data =fs.readFileSync('data/test1.txt' , 'utf-8');
-console.log(data);
+//const data =fs.readFileSync('data/test1.txt' , 'utf-8');
+//console.log(data);
+
+//fs.readFile('data/test.txt' , 'utf-8' , (err,data)=>{
+//if(err)throw err;
+//console.log(data);
+
+
+//})
+
+//ReadLine
+const readline = require('readline');
+const rl = readline.createInterface({
+    input:process.stdin,
+    output:process.stdout,
+})
+rl.question('masukan nama anda?? ', (answer) => {
+    // TODO: Log the answer in a database
+    console.log(`Terima kasih ${answer}`);
+  
+    rl.close();
+  });
