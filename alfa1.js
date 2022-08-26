@@ -19,3 +19,4 @@ const mahasiswa = {
 
 module.exports.CetakNama = CetakNama;
 module.exports.PI = PI;
+module.exports.mahasiswa = mahasiswa;
