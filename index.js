@@ -5,4 +5,4 @@
 
 //console.log(window);
 require('./alfa1')
-console.log("WPU");
+//console.log("WPU");
