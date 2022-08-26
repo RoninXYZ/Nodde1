@@ -4,9 +4,12 @@
   "description": "Node js",
   "main": "app.js",
   "scripts": {
-    "start":"node app" ,
+    "start": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "AMR",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.7.0"
+  }
 }
