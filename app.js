@@ -1,1 +1,3 @@
-console.log("Hello Aliens");
+var validator = require('validator');
+
+console.log(validator.isEmail("sandika@gmail.com"));
