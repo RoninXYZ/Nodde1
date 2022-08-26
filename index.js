@@ -4,5 +4,6 @@
 //console.log(CetakNama(nama));
 
 //console.log(window);
-require('./alfa1')
+const CetakNama = require('./alfa1')
 //console.log("WPU");
+console.log(CetakNama('Sandika'));

@@ -4,4 +4,4 @@ function CetakNama(nama){
     return `Hello ,Nama Saya ${nama}`;
 
 }
-console.log(CetakNama('Sandika'));
+module.exports = CetakNama;
