@@ -29,10 +29,21 @@ const rl = readline.createInterface({
     input:process.stdin,
     output:process.stdout,
 })
-rl.question('masukan nama anda?? ', (answer) => {
+rl.question('masukan nama anda?? ', (nama) => {
     // TODO: Log the answer in a database
-    rl.question('masukan nomor hp anda??' ,(answer1)=>{
-      console.log(`Terimakasih ${answer} no hp anda ${answer1}`)
+    rl.question('masukan nomor hp anda??' ,(noHp)=>{
+      console.log(`Terimakasih ${nama} no hp anda ${noHp}`)
+      const kontak = {
+        nama ,//:nama,
+        noHp //: noHp 
+      }
+     const fileBuffer =  fs.readFileSync('contact.json' , 'utf-8');
+     const contact1 = JSON.parse(fileBuffer);
+    contact1.push(kontak)
+    fs.writeFileSync('contact.json' , JSON.stringify(contact1) ) 
+
+     console.log("terimakasih")
+
       rl.close();
     })
 
