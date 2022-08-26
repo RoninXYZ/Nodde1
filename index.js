@@ -1,4 +1,6 @@
 //const nama = "Sandika Galih";
-const CetakNama = (nama)=>`Hi , Nama saya ${nama}`;
+//const CetakNama = (nama)=>`Hi , Nama saya ${nama}`;
 
-console.log(CetakNama("Sandika Galih"));
+//console.log(CetakNama(nama));
+
+console.log(window);
