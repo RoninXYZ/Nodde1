@@ -3,4 +3,6 @@
 
 //console.log(CetakNama(nama));
 
-console.log(window);
+//console.log(window);
+require('./alfa1')
+console.log("WPU");
