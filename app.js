@@ -8,6 +8,10 @@ const fs = require('fs');
 //}
 //menuliskan file fs tapi asyncronus
 
-fs.writeFile('data/test1.txt' , 'Hello World secara asyncronus', (e)=>{
-    console.log(e)
-})
+//fs.writeFile('data/test1.txt' , 'Hello World secara asyncronus', (e)=>{
+  //  console.log(e)
+//})
+
+//membaca isi file dengan syncronus
+const data =fs.readFileSync('data/test1.txt' , 'utf-8');
+console.log(data);
