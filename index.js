@@ -4,6 +4,13 @@
 //console.log(CetakNama(nama));
 
 //console.log(window);
-const CetakNama = require('./alfa1')
+//const CetakNama = require('./alfa1')
 //console.log("WPU");
-console.log(CetakNama('Sandika'));
+//const fs = require('fs')
+//const moment = require('moment')
+const coba = require('./alfa1')
+
+//console.log(coba);
+
+
+console.log(coba.CetakNama('Sandika') ,coba.PI);

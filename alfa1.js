@@ -4,4 +4,8 @@ function CetakNama(nama){
     return `Hello ,Nama Saya ${nama}`;
 
 }
-module.exports = CetakNama;
+
+const PI = 3.14;
+
+module.exports.CetakNama = CetakNama;
+module.exports.PI = PI;
