@@ -13,4 +13,4 @@ const coba = require('./alfa1')
 //console.log(coba);
 
 
-console.log(coba.CetakNama('Sandika') ,coba.PI , coba.mahasiswa.cetakMhs());
+console.log(coba.CetakNama('Sandika') ,coba.PI , coba.mahasiswa.cetakMhs() , new coba.Orang());
