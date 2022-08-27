@@ -1,9 +1,34 @@
 const yargs = require("yargs");
+const { simpankontak } = require("./kontak");
 
 
-console.log(yargs.argv);
+yargs.command({
+    command:'add',
+    describe:'menambahkan kontak baru',
+    builder: {
+        nama : {
+            describe: 'nama lengkap',
+            demandOption: true,
+            type: 'string'
+        },
+        email: {
+            describe: 'Email',
+            demandOption: false,
+            type: 'string'
 
+        },
+        noHP:{
+            describe: 'NO Handphone',
+            demandOption: false,
+            type: 'string'
+        } 
+    },
+    handler(argv){
+        simpankontak(argv.nama,argv.email,argv.noHP)
+    }
+})
 
+yargs.parse();
 
 
 // const command = process.argv[2];
