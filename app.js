@@ -12,10 +12,10 @@ rl.question('masukan nama anda?? ', (nama) => {
         nama ,//:nama,
         noHp //: noHp 
       }
-     const fileBuffer =  fs.readFileSync('./data/contact.json' , 'utf-8');
+     const fileBuffer =  fs.readFileSync("data/contact.json" , 'utf-8');
      const contact1 = JSON.parse(fileBuffer);
     contact1.push(kontak)
-    fs.writeFileSync('contact.json' , JSON.stringify(contact1) ) 
+    fs.writeFileSync('data/contact.json' , JSON.stringify(contact1) ) 
 
      console.log("terimakasih")
 
