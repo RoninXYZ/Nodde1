@@ -1,4 +1,55 @@
-const contacts = require('./kontak')
+const yargs = require("yargs");
+
+
+console.log(yargs.argv);
+
+
+
+
+// const command = process.argv[2];
+
+// if(command==='add'){
+
+// }else if(command==='remove'){
+
+// }else if(command === 'list'){
+
+// }
+
+// //console.log(process.argv);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const contacts = require('./kontak')
 
 // const pertanyaan2 = ()=>{
 //   return new Promise((resolve , reject)=>{
@@ -8,13 +59,13 @@ const contacts = require('./kontak')
 //   });
 // }
 
-const main =async ()=>{
-  const nama = await contacts.tulis_pertanyaan('masukan nama anda ?');
-  const email = await contacts.tulis_pertanyaan('masukan email anda ?');
-  const NO_HP = await contacts.tulis_pertanyaan('masukan NO_HP anda ?')
-  contacts.simpankontak(nama,email,NO_HP)
- }
-main();
+// const main =async ()=>{
+//   const nama = await contacts.tulis_pertanyaan('masukan nama anda ?');
+//   const email = await contacts.tulis_pertanyaan('masukan email anda ?');
+//   const NO_HP = await contacts.tulis_pertanyaan('masukan NO_HP anda ?')
+//   contacts.simpankontak(nama,email,NO_HP)
+//  }
+// main();
 
 
 
