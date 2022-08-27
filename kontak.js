@@ -1,11 +1,12 @@
 const { rejects } = require('assert');
 const fs = require('fs');
-const { resolve } = require('path');
-const readline = require('readline');
-const rl = readline.createInterface({
-    input:process.stdin,
-    output:process.stdout,
-})
+const chalk = require('chalk')
+// const { resolve } = require('path');
+// const readline = require('readline');
+// const rl = readline.createInterface({
+//     input:process.stdin,
+//     output:process.stdout,
+// })
 //membuat folder data
 const dirPath = "./data";
 if(!fs.existsSync(dirPath)){
@@ -19,13 +20,13 @@ if(!fs.existsSync(dataPath)){
 
 }
 
-const tulis_pertanyaan = (pertanyaan)=>{
-  return new Promise((resolve , rejects)=>{
-    rl.question(pertanyaan, (nama) => {
-      resolve(nama);
-    });
-  });
-}
+// const tulis_pertanyaan = (pertanyaan)=>{
+//   return new Promise((resolve , rejects)=>{
+//     rl.question(pertanyaan, (nama) => {
+//       resolve(nama);
+//     });
+//   });
+// }
 
 const simpankontak =(nama,email,NO_HP)=>{
     const kontak = {
@@ -36,14 +37,23 @@ const simpankontak =(nama,email,NO_HP)=>{
       }
      const fileBuffer =  fs.readFileSync("data/contacts.json" , 'utf-8');
      const contact1 = JSON.parse(fileBuffer);
+    const duplikat = contact1.find((kontak) => kontak.nama === nama)
+if(duplikat){
+  console.log('kontak sudah terdapter , gunakan nama lain');
+  return false;
+}
+
+
+
+
     contact1.push(kontak)
     fs.writeFileSync('data/contacts.json' , JSON.stringify(contact1) ) 
 
      console.log("terimakasih")
 
-      rl.close();  
+       
 }
 
 module.exports ={
-    tulis_pertanyaan,simpankontak
+    simpankontak
 }
