@@ -19,9 +19,9 @@ if(!fs.existsSync(dataPath)){
 
 }
 
-const pertanyaan1 = ()=>{
+const tulis_pertanyaan = (pertanyaan)=>{
   return new Promise((resolve , rejects)=>{
-    rl.question('masukan nama anda?? ', (nama) => {
+    rl.question(pertanyaan, (nama) => {
       resolve(nama);
     });
   });
@@ -29,20 +29,23 @@ const pertanyaan1 = ()=>{
 
 
 
-const pertanyaan2 = ()=>{
-  return new Promise((resolve , reject)=>{
-    rl.question('masukan email anda?? ', (email) => {
-      resolve(email);
-    });
-  });
-}
+// const pertanyaan2 = ()=>{
+//   return new Promise((resolve , reject)=>{
+//     rl.question('masukan email anda?? ', (email) => {
+//       resolve(email);
+//     });
+//   });
+// }
 
 const main =async ()=>{
-  const nama = await pertanyaan1();
-  const email = await pertanyaan2();
+  const nama = await tulis_pertanyaan('masukan nama anda ?');
+  const email = await tulis_pertanyaan('masukan email anda ?');
+  const NO_HP = await tulis_pertanyaan('masukan NO_HP anda ?')
   const kontak = {
             nama ,//:nama,
-            email //: noHp 
+            email,
+            NO_HP //: noHp ,
+
           }
          const fileBuffer =  fs.readFileSync("data/contacts.json" , 'utf-8');
          const contact1 = JSON.parse(fileBuffer);
