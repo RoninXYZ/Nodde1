@@ -1,5 +1,5 @@
 const yargs = require("yargs");
-const { simpankontak } = require("./kontak");
+const contacs = require("./kontak");
 
 
 yargs.command({
@@ -24,9 +24,64 @@ yargs.command({
         } 
     },
     handler(argv){
-        simpankontak(argv.nama,argv.email,argv.noHP)
+        contacs.simpankontak(argv.nama,argv.email,argv.noHP)
+    }
+}).demandCommand();
+
+yargs.command({
+    command:'list',
+    describe:'menampilkan semua nama dan no hp',
+    handler(){
+       contacs.listContact();
     }
 })
+
+//menampilkan detail sebuah kontak
+
+yargs.command({
+    command:'detail',
+    describe:'menampilkan detail nama dan no hp berdasarkan nama',
+    builder: {
+        nama : {
+            describe: 'nama lengkap',
+            demandOption: true,
+            type: 'string'
+        },
+        
+    },
+    
+    handler(argv){
+       contacs.detailcontak(argv.nama);
+    }
+})
+
+yargs.command({
+    command:'delete',
+    describe:'menghapus kontak berdasarkan nama',
+    builder: {
+        nama : {
+            describe: 'nama lengkap',
+            demandOption: true,
+            type: 'string'
+        },
+        
+    },
+    
+    handler(argv){
+       contacs.deletecontak(argv.nama);
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
 
 yargs.parse();
 
