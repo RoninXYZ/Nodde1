@@ -1,6 +1,7 @@
 const { rejects } = require('assert');
 const fs = require('fs');
 const chalk = require('chalk')
+const validator = require('validator')
 // const { resolve } = require('path');
 // const readline = require('readline');
 // const rl = readline.createInterface({
@@ -39,8 +40,24 @@ const simpankontak =(nama,email,NO_HP)=>{
      const contact1 = JSON.parse(fileBuffer);
     const duplikat = contact1.find((kontak) => kontak.nama === nama)
 if(duplikat){
-  console.log('kontak sudah terdapter , gunakan nama lain');
+  console.log(chalk.red.inverse.bold('kontak sudah terdapter , gunakan nama lain'));
   return false;
+}
+
+if(email){
+  if(!validator.isEmail(email)){
+    console.log(chalk.red.inverse.bold('Email tidak valid'));
+    return false;
+  }
+
+}
+
+if(NO_HP){
+  if(!validator.isMobilePhone(NO_HP, 'id-ID')){
+    console.log(chalk.red.inverse.bold('Nomor hp tidak valid'));
+    return false;
+  }
+
 }
 
 
@@ -49,7 +66,7 @@ if(duplikat){
     contact1.push(kontak)
     fs.writeFileSync('data/contacts.json' , JSON.stringify(contact1) ) 
 
-     console.log("terimakasih")
+     console.log(chalk.green.inverse.bold("terimakasih"));
 
        
 }
