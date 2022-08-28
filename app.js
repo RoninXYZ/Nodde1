@@ -5,6 +5,21 @@ const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
 app.use(expressLayouts)
 
+
+app.use(express.static('public'));
+
+//aplication level midlwere
+app.use((req, res, next) => {
+    console.log('Time:', Date.now())
+    next();
+  })
+  app.use((req, res, next) => {
+    console.log('ini midle were kedua')
+    next();
+  })
+
+
+
 app.get('/', (req, res) => {
     //res.sendFile('./index.html', { root: __dirname }) 
     const mahasiswa = [
@@ -29,9 +44,10 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/about', (req, res) => {
+app.get('/about', (req, res ,) => {
     //res.sendFile('./about.html', { root: __dirname })
-    res.render('about' , {layout:'layout/main_layout',title :"Halaman about" ,})
+    res.render('about' , {layout:'layout/main_layout',title :"Halaman about" ,});
+    
 })
 app.get('/kontak', (req, res) => {
     //res.send('ini halaman kontak')
