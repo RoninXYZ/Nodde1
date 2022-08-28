@@ -13,12 +13,18 @@ app.get('/', (req, res) => {
     //     noHP : 0812345456,
     //   })
 })
+
 app.get('/about', (req, res) => {
     res.sendFile('./about.html', { root: __dirname })
 })
 app.get('/kontak', (req, res) => {
     //res.send('ini halaman kontak')
     res.sendFile('./contac.html', { root: __dirname })
+})
+
+app.get('/produk/:id' , (req,res)=>{
+    res.send(`Product : ID  ${req.params.id}  <br> Catagory : ${req.query.category}`)
+
 })
 
 app.use('/', (req, res) => {
