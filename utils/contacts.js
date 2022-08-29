@@ -12,6 +12,13 @@ if (!fs.existsSync(dataPath)) {
   fs.writeFileSync(dataPath, "[]", "utf-8");
 
 }
+//find kontak
+const findkontak =(nama)=>{
+    const contact1 = loadkontak();
+  const contact = contact1.find((contact) => contact.nama.toLowerCase() === nama.toLowerCase())
+  return contact
+
+}
 
 
 
@@ -22,4 +29,4 @@ const loadkontak = () => {
   return contact1;
 }
 
-module.exports ={loadkontak}
+module.exports ={loadkontak , findkontak}

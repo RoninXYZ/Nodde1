@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const {loadkontak}=require('./utils/contacts')
+const {loadkontak , findkontak}=require('./utils/contacts')
 const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
 app.use(expressLayouts)
@@ -54,7 +54,16 @@ app.get('/kontak', (req, res) => {
     contacts:contacts,
 })
 })
+app.get('/kontak/:nama', (req, res) => {
 
+    const contact = findkontak(req.params.nama);
+   
+    //res.send('ini halaman kontak')
+    //res.sendFile('./contac.html', { root: __dirname })
+    res.render('detail' , {layout:'layout/main_layout',title :"Halaman detail kontak" ,
+    contact,
+})
+})
 
 
 app.use('/', (req, res) => {
