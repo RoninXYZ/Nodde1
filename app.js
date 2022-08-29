@@ -1,10 +1,11 @@
 const express = require('express')
 const app = express()
 const port = 3000
+var morgan = require('morgan')
 const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
 app.use(expressLayouts)
-
+app.use(morgan('dev'))
 
 app.use(express.static('public'));
 
