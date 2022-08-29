@@ -1,23 +1,17 @@
 const express = require('express')
 const app = express()
 const port = 3000
-var morgan = require('morgan')
+const {loadkontak}=require('./utils/contacts')
 const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
 app.use(expressLayouts)
-app.use(morgan('dev'))
+
 
 app.use(express.static('public'));
 
-//aplication level midlwere
-app.use((req, res, next) => {
-    console.log('Time:', Date.now())
-    next();
-  })
-  app.use((req, res, next) => {
-    console.log('ini midle were kedua')
-    next();
-  })
+
+
+ 
 
 
 
@@ -51,15 +45,17 @@ app.get('/about', (req, res ,) => {
     
 })
 app.get('/kontak', (req, res) => {
+
+    const contacts = loadkontak();
+   
     //res.send('ini halaman kontak')
     //res.sendFile('./contac.html', { root: __dirname })
-    res.render('contac' , {layout:'layout/main_layout',title :"Halaman kontak" ,})
+    res.render('contac' , {layout:'layout/main_layout',title :"Halaman kontak" ,
+    contacts:contacts,
+})
 })
 
-app.get('/produk/:id' , (req,res)=>{
-    res.send(`Product : ID  ${req.params.id}  <br> Catagory : ${req.query.category}`)
 
-})
 
 app.use('/', (req, res) => {
     res.status(404);
