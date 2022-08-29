@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const {loadkontak , findkontak}=require('./utils/contacts')
+const {loadkontak , findkontak ,addKontak}=require('./utils/contacts')
 const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
 app.use(expressLayouts)
-
+app.use(express.urlencoded());
 
 app.use(express.static('public'));
 
@@ -54,6 +54,25 @@ app.get('/kontak', (req, res) => {
     contacts:contacts,
 })
 })
+//halaman form
+app.get('/kontak/add' ,(req,res)=>{
+    res.render('add-kontak' , {
+        title:"form tambah data kontak",
+        layout:'layout/main_layout',
+
+    })
+})
+//proses data kontak
+
+app.post('/kontak' , (req,res)=>{
+   
+   addKontak(req.body);
+   res.redirect('/kontak')
+})
+
+
+
+//halaman detail kontak
 app.get('/kontak/:nama', (req, res) => {
 
     const contact = findkontak(req.params.nama);

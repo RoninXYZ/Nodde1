@@ -29,4 +29,15 @@ const loadkontak = () => {
   return contact1;
 }
 
-module.exports ={loadkontak , findkontak}
+const saveKontak =(contacts)=>{
+  fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+}
+
+const addKontak = (contact)=>{
+
+  const contacts = loadkontak();
+  contacts.push(contact);
+  saveKontak(contacts);
+}
+
+module.exports ={loadkontak , findkontak , addKontak}
