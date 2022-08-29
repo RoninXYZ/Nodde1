@@ -1,15 +1,31 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const {loadkontak , findkontak ,addKontak}=require('./utils/contacts')
+const {loadkontak , findkontak ,addKontak , cekDuplikat}=require('./utils/contacts')
+const { body, validationResult  , check} = require('express-validator');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
+
+
 const  expressLayouts = require('express-ejs-layouts');
 app.set('view engine' ,'ejs');
-app.use(expressLayouts)
-app.use(express.urlencoded());
-
+app.use(expressLayouts);
 app.use(express.static('public'));
+app.use(express.urlencoded({extended:true}));
+
+app.use(cookieParser('secret'));
+app.use(session({
+cookie:{maxAge:6000},
+secret:'secret',
+resave : true, 
+saveUninitialized:true,
 
 
+}));
+
+app.use(flash());
+//konfigurasi
 
  
 
@@ -51,7 +67,7 @@ app.get('/kontak', (req, res) => {
     //res.send('ini halaman kontak')
     //res.sendFile('./contac.html', { root: __dirname })
     res.render('contac' , {layout:'layout/main_layout',title :"Halaman kontak" ,
-    contacts:contacts,
+    contacts:contacts,msg:req.flash('msg')
 })
 })
 //halaman form
@@ -64,11 +80,41 @@ app.get('/kontak/add' ,(req,res)=>{
 })
 //proses data kontak
 
-app.post('/kontak' , (req,res)=>{
-   
-   addKontak(req.body);
-   res.redirect('/kontak')
-})
+app.post('/kontak', [
+body ('nama').custom((value)=>{
+const duplikat = cekDuplikat(value);
+if(duplikat){
+    throw new Error('nama kontak sudah ada')
+}
+return true;
+
+}),
+check('email', 'email tidak valid').isEmail(),
+check('nohp' ,'no hp tidak valid' ).isMobilePhone('id-ID')
+
+], (req,res)=>{
+   const errors = validationResult(req);
+//    addKontak(req.body);
+//    res.redirect('/kontak')
+if (!errors.isEmpty()) {
+    //return res.status(400).json({ errors: errors.array() });
+   res.render('add-kontak' ,{
+    title:"form tambah data kontak",
+    layout:'layout/main_layout',
+    errors:errors.array(),
+
+   })  
+}else{
+  addKontak(req.body);
+  req.flash('msg', 'data kontak good job')
+  res.redirect('/kontak')
+//kirim
+
+}
+ }
+
+
+)
 
 
 
