@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const {loadkontak , findkontak ,addKontak , cekDuplikat}=require('./utils/contacts')
+const {loadkontak , findkontak ,addKontak , cekDuplikat ,deleteKontak ,updateKontak}=require('./utils/contacts')
 const { body, validationResult  , check} = require('express-validator');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -115,6 +115,72 @@ if (!errors.isEmpty()) {
 
 
 )
+//proses delet contact
+app.get('/kontak/delete/:nama', (req,res)=>{
+    const contact = findkontak(req.params.nama);
+    if(!contact){
+        res.status(404);
+        res.send('<h1>404</h1>');
+    }else{
+        deleteKontak(req.params.nama);
+        req.flash('msg', 'data kontak good job')
+        res.redirect('/kontak')
+    }
+
+})
+
+//form ubah data kontak
+app.get('/kontak/edit/:nama' ,(req,res)=>{
+
+    const contact = findkontak(req.params.nama);
+
+    res.render('edit-kontak' , {
+        title:"form ubah data kontak",
+        layout:'layout/main_layout',
+        contact:contact ,
+    })
+})
+
+//proses ubah data
+
+app.post('/kontak/update', [
+    body ('nama').custom((value ,{req})=>{
+    const duplikat = cekDuplikat(value);
+    if(value !== req.body.oldnama && duplikat){
+        throw new Error('nama kontak sudah ada')
+    }
+    return true;
+    
+    }),
+    check('email', 'email tidak valid').isEmail(),
+    check('nohp' ,'no hp tidak valid' ).isMobilePhone('id-ID')
+    
+    ], (req,res)=>{
+       const errors = validationResult(req);
+    //    addKontak(req.body);
+    //    res.redirect('/kontak')
+    if (!errors.isEmpty()) {
+        //return res.status(400).json({ errors: errors.array() });
+       res.render('edit-kontak' ,{
+        title:"form Ubah data kontak",
+        layout:'layout/main_layout',
+        errors:errors.array(),
+        contact:req.body,
+    
+       })  
+    }else{
+        
+      updateKontak(req.body);
+       req.flash('msg', 'ubah data kontak good job')
+       res.redirect('/kontak')
+    //kirim
+    
+    }
+     }
+    
+    
+    )
+
 
 
 

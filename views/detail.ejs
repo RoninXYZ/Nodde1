@@ -17,8 +17,11 @@
                   <h5 class="card-title"><%= contact.nama %></h5>
                   <h6 class="card-subtitle mb-2 text-muted"><%= contact.nohp %></h6>
                   <p class="card-text"><%= contact.email %></p>
-                  <a href="/kontak" class="card-link">kembali ke daftar kontak</a>
-                 
+                  <a href="/kontak/edit/<%= contact.nama %>" class="btn btn-info badge" > ubah</a>
+                 <a href="/kontak/delete/<%= contact.nama %>" class="btn btn-danger badge" onclick="return confirm('yakin?');"> hapus</a>
+                 <br/> 
+                 <a href="/kontak" class="card-link">kembali ke  kontak</a>
+                  
                 </div>
               </div>
         </div>
